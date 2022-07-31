@@ -10,7 +10,7 @@ public class Conn {
       public static java.sql.Connection getConnection(){
         if(koneksi == null){
           try{
-              String url = "jdbc:mysql://localhost/kredit-motor";              
+              String url = "jdbc:mysql://localhost/kredit_motor";              
               String user = "root";
               String password = "";
               
