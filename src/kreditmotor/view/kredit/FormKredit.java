@@ -1,10 +1,150 @@
 package kreditmotor.view.kredit;
 
+import java.sql.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import kreditmotor.model.kredit.Kredit;
+import kreditmotor.model.kredit.KreditJdbc;
+import kreditmotor.model.kredit.KreditJdbcImplement;
+import kreditmotor.model.pembeli.Pembeli;
+import kreditmotor.model.pembeli.PembeliJdbc;
+import kreditmotor.model.pembeli.PembeliJdbcImplement;
+import kreditmotor.model.sales.Sales;
+import kreditmotor.model.sales.SalesJdbc;
+import kreditmotor.model.sales.SalesJdbcImplement;
+import kreditmotor.view.menu.FormMenu;
+
+
 public class FormKredit extends javax.swing.JFrame {
+    
+    private final KreditJdbc kreditJdbc;
+    private final SalesJdbc salesJdbc;
+    private final PembeliJdbc pembeliJdbc;
+    private Boolean clickTable;
+    private DefaultTableModel defaultTableModel;
 
     public FormKredit() {
         initComponents();
+        kreditJdbc = new KreditJdbcImplement();
+        salesJdbc = new SalesJdbcImplement();
+        pembeliJdbc = new PembeliJdbcImplement();
+        initTable();
+        loadTable();
+        loadComboBoxSales();
+        loadComboBoxPembeli();
     }
+    
+    private void initTable() {
+        defaultTableModel = new DefaultTableModel();
+        defaultTableModel.addColumn("No");
+        defaultTableModel.addColumn("Id Pembeli");
+        defaultTableModel.addColumn("Id Barang");
+        defaultTableModel.addColumn("Tanggal Pembeli");
+        defaultTableModel.addColumn("Id Sales");
+        tableKredit.setModel(defaultTableModel);
+    }
+    
+    private void loadTable() {
+        defaultTableModel.getDataVector().removeAllElements();
+        defaultTableModel.fireTableDataChanged();
+        List<Kredit> responses = kreditJdbc.selectAll();
+        if (responses != null) {
+            Object[] objects = new Object[10];
+            for (Kredit response : responses) {
+                objects[0] = response.getId();
+                objects[1] = response.getIdPembeli();
+                objects[2] = response.getIdBarang();
+                objects[3] = response.getTanggalKredit();
+                objects[4] = response.getIdSales();                
+                defaultTableModel.addRow(objects);
+            }
+            clickTable = false;
+        }
+    }
+    
+    private void loadComboBoxPembeli() {
+        List<Pembeli> responses = pembeliJdbc.selectAll();
+        for (Pembeli response : responses) {
+            cbxIdPembeli.addItem(String.valueOf(response.getId()));
+        }
+    }
+
+    private void loadComboBoxSales() {
+        List<Sales> responses = salesJdbc.selectAll();
+        for (Sales response : responses) {
+            cbxIdSales.addItem(String.valueOf(response.getId()));
+        }
+    }
+    
+    private void clickTable() {
+        cbxIdPembeli.setSelectedItem(defaultTableModel.getValueAt(tableKredit.getSelectedRow(), 1).toString());        
+        cbxIdBarang.setSelectedItem(defaultTableModel.getValueAt(tableKredit.getSelectedRow(), 2).toString());        
+        cbxIdSales.setSelectedItem(defaultTableModel.getValueAt(tableKredit.getSelectedRow(), 3).toString());        
+        clickTable = true;
+    }
+    
+    private void empty() {
+        cbxIdPembeli.setSelectedIndex(0);        
+        cbxIdBarang.setSelectedIndex(0);
+        cbxIdSales.setSelectedIndex(0);        
+    }
+    
+    private void performSave() {
+        if (tanggalKredit.getDate() != null) {
+            if (JOptionPane.showConfirmDialog(null, "Do you want to save new data ?", "Info", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+                Kredit request = new Kredit();
+                request.setId(0L);
+                request.setIdPembeli(Long.parseLong(cbxIdPembeli.getSelectedItem().toString()));                               
+                request.setIdPembeli(Long.parseLong(cbxIdBarang.getSelectedItem().toString()));                               
+                request.setIdPembeli(Long.parseLong(cbxIdSales.getSelectedItem().toString()));                               
+                request.setTanggalKredit((Date) tanggalKredit.getDate());               
+                kreditJdbc.insert(request);
+                loadTable();
+                empty();
+                JOptionPane.showMessageDialog(null, "Successfully save data", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Data not empty", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    
+    private void performUpdate() {
+        if (clickTable) {
+            if (tanggalKredit.getDate() != null) {
+                if (JOptionPane.showConfirmDialog(null, "Do you want to update data by id " + defaultTableModel.getValueAt(tableKredit.getSelectedRow(), 0).toString() + " ?", "Warning", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+                    Kredit request = new Kredit();
+                    request.setId(Long.parseLong(defaultTableModel.getValueAt(tableKredit.getSelectedRow(), 0).toString()));
+                    request.setIdPembeli(Long.parseLong(cbxIdPembeli.getSelectedItem().toString()));                   
+                    request.setIdBarang(Long.parseLong(cbxIdBarang.getSelectedItem().toString()));                   
+                    request.setIdSales(Long.parseLong(cbxIdSales.getSelectedItem().toString()));                   
+                    request.setTanggalKredit((Date) tanggalKredit.getDate());
+                    kreditJdbc.update(request);
+                    loadTable();
+                    empty();
+                    JOptionPane.showMessageDialog(null, "Successfully update data", "Success", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Data not empty", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Delete or edit must click table", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    
+    private void performDelete() {
+        if (clickTable) {
+            if (JOptionPane.showConfirmDialog(null, "Do you want to delete data by id " + defaultTableModel.getValueAt(tableKredit.getSelectedRow(), 0).toString() + " ?", "Warning", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+                kreditJdbc.delete(Long.parseLong(defaultTableModel.getValueAt(tableKredit.getSelectedRow(), 0).toString()));
+                loadTable();
+                empty();
+                JOptionPane.showMessageDialog(null, "Successfully delete data", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Delete or edit must click table", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -20,7 +160,7 @@ public class FormKredit extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         cbxIdPembeli = new javax.swing.JComboBox<>();
-        dateKredit = new com.toedter.calendar.JDateChooser();
+        tanggalKredit = new com.toedter.calendar.JDateChooser();
         cbxIdSales = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableKredit = new javax.swing.JTable();
@@ -53,18 +193,23 @@ public class FormKredit extends javax.swing.JFrame {
         btnLogout.setBackground(new java.awt.Color(0, 102, 255));
         btnLogout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLogout.setForeground(new java.awt.Color(255, 255, 255));
-        btnLogout.setText("Logout");
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kreditmotor/image/logout.png"))); // NOI18N
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(460, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(284, 284, 284)
+                .addGap(271, 271, 271)
                 .addComponent(btnLogout)
-                .addGap(48, 48, 48))
+                .addGap(61, 61, 61))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,8 +241,8 @@ public class FormKredit extends javax.swing.JFrame {
         cbxIdPembeli.setForeground(new java.awt.Color(255, 255, 255));
         cbxIdPembeli.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
 
-        dateKredit.setBackground(new java.awt.Color(204, 204, 204));
-        dateKredit.setForeground(new java.awt.Color(255, 255, 255));
+        tanggalKredit.setBackground(new java.awt.Color(204, 204, 204));
+        tanggalKredit.setForeground(new java.awt.Color(255, 255, 255));
 
         cbxIdSales.setBackground(new java.awt.Color(204, 204, 204));
         cbxIdSales.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
@@ -112,12 +257,22 @@ public class FormKredit extends javax.swing.JFrame {
                 "Id", "Id Pembeli", "Id Barang", "Tanggal Kredit", "Id Sales"
             }
         ));
+        tableKredit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableKreditMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableKredit);
 
         btnInsert.setBackground(new java.awt.Color(51, 102, 255));
         btnInsert.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         btnInsert.setForeground(new java.awt.Color(255, 255, 255));
         btnInsert.setText("Insert");
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertActionPerformed(evt);
+            }
+        });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kreditmotor/image/insert (1).png"))); // NOI18N
 
@@ -127,6 +282,11 @@ public class FormKredit extends javax.swing.JFrame {
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kreditmotor/image/delete.png"))); // NOI18N
 
@@ -134,11 +294,21 @@ public class FormKredit extends javax.swing.JFrame {
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnClear.setBackground(new java.awt.Color(51, 102, 255));
         btnClear.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         btnClear.setForeground(new java.awt.Color(255, 255, 255));
         btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kreditmotor/image/clear.png"))); // NOI18N
 
@@ -159,7 +329,7 @@ public class FormKredit extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cbxIdPembeli, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(dateKredit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tanggalKredit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbxIdSales, 0, 214, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -215,7 +385,7 @@ public class FormKredit extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dateKredit, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tanggalKredit, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -230,14 +400,15 @@ public class FormKredit extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(445, 445, 445)
-                .addComponent(jLabel10)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(397, 397, 397))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,6 +453,31 @@ public class FormKredit extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        performSave();
+    }//GEN-LAST:event_btnInsertActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        performUpdate();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        performDelete();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        empty();
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        new FormMenu().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void tableKreditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableKreditMouseClicked
+        clickTable();
+    }//GEN-LAST:event_tableKreditMouseClicked
+
     public static void main(String args[]) {
         
         try {
@@ -318,7 +514,6 @@ public class FormKredit extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxIdBarang;
     private javax.swing.JComboBox<String> cbxIdPembeli;
     private javax.swing.JComboBox<String> cbxIdSales;
-    private com.toedter.calendar.JDateChooser dateKredit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -335,5 +530,6 @@ public class FormKredit extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableKredit;
+    private com.toedter.calendar.JDateChooser tanggalKredit;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,6 +6,7 @@ import javax.swing.table.DefaultTableModel;
 import kreditmotor.model.pembeli.Pembeli;
 import kreditmotor.model.pembeli.PembeliJdbc;
 import kreditmotor.model.pembeli.PembeliJdbcImplement;
+import kreditmotor.view.menu.FormMenu;
 
 public class FormPembeli extends javax.swing.JFrame {
 
@@ -223,7 +224,12 @@ public class FormPembeli extends javax.swing.JFrame {
         btnLogout.setBackground(new java.awt.Color(0, 102, 255));
         btnLogout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLogout.setForeground(new java.awt.Color(255, 255, 255));
-        btnLogout.setText("Logout");
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kreditmotor/image/logout.png"))); // NOI18N
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -439,10 +445,10 @@ public class FormPembeli extends javax.swing.JFrame {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDelete)
-                        .addGap(26, 26, 26)
+                        .addGap(32, 32, 32)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(22, 22, 22))
         );
         jPanel4Layout.setVerticalGroup(
@@ -584,6 +590,11 @@ public class FormPembeli extends javax.swing.JFrame {
     private void tablePembeliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePembeliMouseClicked
         clickTable();
     }//GEN-LAST:event_tablePembeliMouseClicked
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        new FormMenu().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     public static void main(String args[]) {
 

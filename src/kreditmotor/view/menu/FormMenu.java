@@ -3,7 +3,7 @@ package kreditmotor.view.menu;
 public class FormMenu extends javax.swing.JFrame {
 
     public FormMenu() {
-        initComponents();
+        initComponents();        
     }
 
     @SuppressWarnings("unchecked")
