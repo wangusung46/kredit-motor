@@ -1,9 +1,26 @@
 package kreditmotor.view.menu;
 
+import javax.swing.JOptionPane;
+import kreditmotor.model.admin.Admin;
+import kreditmotor.model.admin.AdminJdbc;
+import kreditmotor.model.admin.AdminJdbcImplement;
+
 public class FormRegister extends javax.swing.JFrame {
+    
+    private final AdminJdbc adminJdbc;
 
     public FormRegister() {
         initComponents();
+        adminJdbc = new AdminJdbcImplement();
+    }
+    
+    private void empty() {
+        txtPassword.setText("");
+    }
+
+    private void perLogin() {
+        new FormLogin().setVisible(true);
+        dispose();
     }
 
     @SuppressWarnings("unchecked")
@@ -104,6 +121,11 @@ public class FormRegister extends javax.swing.JFrame {
         btnSignup.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         btnSignup.setForeground(new java.awt.Color(255, 255, 255));
         btnSignup.setText("Signup");
+        btnSignup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignupActionPerformed(evt);
+            }
+        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kreditmotor/image/add-user (1).png"))); // NOI18N
 
@@ -203,6 +225,33 @@ public class FormRegister extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupActionPerformed
+        if (!txtNama.getText().isEmpty()) {
+            if (!txtUser.getText().isEmpty()) {
+                if (!txtPassword.getText().isEmpty()) {
+                    Admin admin = new Admin();
+                    admin.setId(0L);
+                    admin.setNama(txtNama.getText());
+                    admin.setPassword(txtPassword.getText());
+                    admin.setRole(cbxRole.getSelectedItem().toString());
+                    admin.setUser(txtUser.getText());
+                    adminJdbc.insert(admin);
+                    JOptionPane.showMessageDialog(null, "Success Register", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    perLogin();
+                } else {
+                    empty();
+                    JOptionPane.showMessageDialog(null, "Password tidak boleh kosong", "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+            } else {
+                empty();
+                JOptionPane.showMessageDialog(null, "Nama tidak boleh kosong", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            empty();
+            JOptionPane.showMessageDialog(null, "Admin name tidak boleh kosong", "Warning", JOptionPane.WARNING_MESSAGE);
+        }       
+    }//GEN-LAST:event_btnSignupActionPerformed
 
     public static void main(String args[]) {
         
