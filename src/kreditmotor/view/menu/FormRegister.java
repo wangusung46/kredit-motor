@@ -115,7 +115,7 @@ public class FormRegister extends javax.swing.JFrame {
         cbxRole.setBackground(new java.awt.Color(153, 153, 153));
         cbxRole.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         cbxRole.setForeground(new java.awt.Color(255, 255, 255));
-        cbxRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin 1", "Admin 2" }));
+        cbxRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Bagian Keuangan" }));
 
         btnSignup.setBackground(new java.awt.Color(51, 102, 255));
         btnSignup.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N

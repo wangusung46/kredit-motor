@@ -27,7 +27,7 @@ public class AdminJdbcImplement implements AdminJdbc {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, userName);
             preparedStatement.setString(2, password);
-            System.out.println(preparedStatement.toString());
+            logger.debug(preparedStatement.toString());
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 resultSet.close();
@@ -48,7 +48,7 @@ public class AdminJdbcImplement implements AdminJdbc {
     public void insert(Admin request) {
         logger.debug(request.toString());
         try {
-            sql = "INSERT INTO admin (nama, user, `admin`, password, `role`) VALUES(?, ?, ?, ?);";
+            sql = "INSERT INTO admin (nama, user, password, `role`) VALUES(?, ?, ?, ?);";
             preparedStatement = connection.prepareStatement(sql);            
             preparedStatement.setString(1, request.getNama());  
             preparedStatement.setString(2, request.getUser());

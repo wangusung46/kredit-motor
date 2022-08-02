@@ -1,5 +1,6 @@
 package kreditmotor.view.motor;
 
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -107,6 +108,12 @@ public class FormMotor extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Delete or edit must click table", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     } 
+    
+    private void filterNumber(KeyEvent keyEvent) {
+        if (!Character.isDigit(keyEvent.getKeyChar())) {
+            keyEvent.consume();
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -260,6 +267,11 @@ public class FormMotor extends javax.swing.JFrame {
         txtHargaJual.setBackground(new java.awt.Color(153, 153, 153));
         txtHargaJual.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         txtHargaJual.setForeground(new java.awt.Color(255, 255, 255));
+        txtHargaJual.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtHargaJualKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -404,6 +416,10 @@ public class FormMotor extends javax.swing.JFrame {
     private void tableMotorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMotorMouseClicked
         clickTable();
     }//GEN-LAST:event_tableMotorMouseClicked
+
+    private void txtHargaJualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHargaJualKeyTyped
+        filterNumber(evt);
+    }//GEN-LAST:event_txtHargaJualKeyTyped
 
     public static void main(String args[]) {
         

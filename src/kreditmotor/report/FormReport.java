@@ -1,9 +1,91 @@
 package kreditmotor.report;
 
+import java.io.InputStream;
+import java.sql.Connection;
+import java.util.HashMap;
+import koneksi.Conn;
+import kreditmotor.view.menu.FormMenu;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+
 public class FormReport extends javax.swing.JFrame {
+    
+    private static Connection connection;
 
     public FormReport() {
         initComponents();
+        connection = Conn.getConnection();
+    }
+    
+    private void printSales() {
+        try {
+            HashMap parameter = new HashMap();
+            InputStream file = getClass().getResourceAsStream("/kreditmotor/report/Sales.jrxml");
+            JasperDesign JasperDesign = JRXmlLoader.load(file);
+            JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
+            @SuppressWarnings("unchecked")
+            JasperPrint JasperPrint = JasperFillManager.fillReport(JasperReport, parameter, connection);
+            JasperViewer.viewReport(JasperPrint, false);
+        } catch (JRException e) {
+        }
+    }
+    
+    private void printMotor() {
+        try {
+            HashMap parameter = new HashMap();
+            InputStream file = getClass().getResourceAsStream("/kreditmotor/report/Motor.jrxml");
+            JasperDesign JasperDesign = JRXmlLoader.load(file);
+            JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
+            @SuppressWarnings("unchecked")
+            JasperPrint JasperPrint = JasperFillManager.fillReport(JasperReport, parameter, connection);
+            JasperViewer.viewReport(JasperPrint, false);
+        } catch (JRException e) {
+        }
+    }
+    
+    private void printKredit() {
+        try {
+            HashMap parameter = new HashMap();
+            InputStream file = getClass().getResourceAsStream("/kreditmotor/report/Kredit.jrxml");
+            JasperDesign JasperDesign = JRXmlLoader.load(file);
+            JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
+            @SuppressWarnings("unchecked")
+            JasperPrint JasperPrint = JasperFillManager.fillReport(JasperReport, parameter, connection);
+            JasperViewer.viewReport(JasperPrint, false);
+        } catch (JRException e) {
+        }
+    }
+    
+    private void printAngsur() {
+        try {
+            HashMap parameter = new HashMap();
+            InputStream file = getClass().getResourceAsStream("/kreditmotor/report/Angsur.jrxml");
+            JasperDesign JasperDesign = JRXmlLoader.load(file);
+            JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
+            @SuppressWarnings("unchecked")
+            JasperPrint JasperPrint = JasperFillManager.fillReport(JasperReport, parameter, connection);
+            JasperViewer.viewReport(JasperPrint, false);
+        } catch (JRException e) {
+        }
+    }
+    
+    private void printPembeli() {
+        try {
+            HashMap parameter = new HashMap();
+            InputStream file = getClass().getResourceAsStream("/kreditmotor/report/Pembeli.jrxml");
+            JasperDesign JasperDesign = JRXmlLoader.load(file);
+            JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
+            @SuppressWarnings("unchecked")
+            JasperPrint JasperPrint = JasperFillManager.fillReport(JasperReport, parameter, connection);
+            JasperViewer.viewReport(JasperPrint, false);
+        } catch (JRException e) {
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -27,10 +109,6 @@ public class FormReport extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        dateDari = new com.toedter.calendar.JDateChooser();
-        jLabel9 = new javax.swing.JLabel();
-        dateSampai = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MENU UTAMA");
@@ -49,18 +127,23 @@ public class FormReport extends javax.swing.JFrame {
         btnLogout.setBackground(new java.awt.Color(0, 102, 255));
         btnLogout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLogout.setForeground(new java.awt.Color(255, 255, 255));
-        btnLogout.setText("Logout");
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kreditmotor/image/logout.png"))); // NOI18N
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(317, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(196, 196, 196)
+                .addGap(244, 244, 244)
                 .addComponent(btnLogout)
-                .addGap(48, 48, 48))
+                .addGap(41, 41, 41))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,26 +162,51 @@ public class FormReport extends javax.swing.JFrame {
         btnReportSales.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         btnReportSales.setForeground(new java.awt.Color(255, 255, 255));
         btnReportSales.setText("Sales");
+        btnReportSales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportSalesActionPerformed(evt);
+            }
+        });
 
         btnReportPembeli.setBackground(new java.awt.Color(51, 51, 255));
         btnReportPembeli.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         btnReportPembeli.setForeground(new java.awt.Color(255, 255, 255));
         btnReportPembeli.setText("Pembeli");
+        btnReportPembeli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportPembeliActionPerformed(evt);
+            }
+        });
 
         btnReportAngsur.setBackground(new java.awt.Color(51, 51, 255));
         btnReportAngsur.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         btnReportAngsur.setForeground(new java.awt.Color(255, 255, 255));
         btnReportAngsur.setText("Angsur");
+        btnReportAngsur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportAngsurActionPerformed(evt);
+            }
+        });
 
         btnReportMotor.setBackground(new java.awt.Color(51, 51, 255));
         btnReportMotor.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         btnReportMotor.setForeground(new java.awt.Color(255, 255, 255));
         btnReportMotor.setText("Motor");
+        btnReportMotor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportMotorActionPerformed(evt);
+            }
+        });
 
         btnReportKredit.setBackground(new java.awt.Color(51, 51, 255));
         btnReportKredit.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         btnReportKredit.setForeground(new java.awt.Color(255, 255, 255));
         btnReportKredit.setText("Kredit");
+        btnReportKredit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportKreditActionPerformed(evt);
+            }
+        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kreditmotor/image/sales (2).png"))); // NOI18N
 
@@ -111,14 +219,6 @@ public class FormReport extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kreditmotor/image/calendar.png"))); // NOI18N
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kreditmotor/image/report 3.1.png"))); // NOI18N
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Dari :");
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setText("Sampai :");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -144,20 +244,10 @@ public class FormReport extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnReportKredit, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnReportSales, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dateDari, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dateSampai, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(60, 60, 60)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnReportSales, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -173,21 +263,10 @@ public class FormReport extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnReportKredit, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7)
-                            .addComponent(dateDari, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel9)
-                            .addComponent(dateSampai, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReportKredit, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -220,7 +299,7 @@ public class FormReport extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
         );
@@ -257,6 +336,31 @@ public class FormReport extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        new FormMenu().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnReportSalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportSalesActionPerformed
+        printSales();
+    }//GEN-LAST:event_btnReportSalesActionPerformed
+
+    private void btnReportMotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportMotorActionPerformed
+        printMotor();
+    }//GEN-LAST:event_btnReportMotorActionPerformed
+
+    private void btnReportKreditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportKreditActionPerformed
+        printKredit();
+    }//GEN-LAST:event_btnReportKreditActionPerformed
+
+    private void btnReportAngsurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportAngsurActionPerformed
+        printAngsur();
+    }//GEN-LAST:event_btnReportAngsurActionPerformed
+
+    private void btnReportPembeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportPembeliActionPerformed
+        printPembeli();
+    }//GEN-LAST:event_btnReportPembeliActionPerformed
+
     public static void main(String args[]) {
         
         try {
@@ -266,13 +370,7 @@ public class FormReport extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FormReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
@@ -291,17 +389,13 @@ public class FormReport extends javax.swing.JFrame {
     private javax.swing.JButton btnReportMotor;
     private javax.swing.JButton btnReportPembeli;
     private javax.swing.JButton btnReportSales;
-    private com.toedter.calendar.JDateChooser dateDari;
-    private com.toedter.calendar.JDateChooser dateSampai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

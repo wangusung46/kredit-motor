@@ -1,9 +1,31 @@
 package kreditmotor.view.menu;
 
+import kreditmotor.model.admin.Admin;
+import kreditmotor.report.FormReport;
+import kreditmotor.view.angsur.FormAngsur;
+import kreditmotor.view.kredit.FormKredit;
+import kreditmotor.view.motor.FormMotor;
+import kreditmotor.view.pembeli.FormPembeli;
+import kreditmotor.view.sales.FormSales;
+
 public class FormMenu extends javax.swing.JFrame {
 
     public FormMenu() {
-        initComponents();        
+        initComponents();
+        switch (Admin.userLogin) {
+            case "Admin":
+                break;
+            case "Bagian Keuangan":
+                btnSales.setEnabled(false);
+                btnPembeli.setEnabled(false);
+                btnMotor.setEnabled(false);
+                btnKredit.setEnabled(false);
+                btnAngsur.setEnabled(false);
+                break;
+            default:
+                dispose();
+                break;
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -48,6 +70,11 @@ public class FormMenu extends javax.swing.JFrame {
         btnLogout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLogout.setForeground(new java.awt.Color(255, 255, 255));
         btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -77,31 +104,61 @@ public class FormMenu extends javax.swing.JFrame {
         btnSales.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         btnSales.setForeground(new java.awt.Color(255, 255, 255));
         btnSales.setText("Sales");
+        btnSales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalesActionPerformed(evt);
+            }
+        });
 
         btnPembeli.setBackground(new java.awt.Color(51, 51, 255));
         btnPembeli.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         btnPembeli.setForeground(new java.awt.Color(255, 255, 255));
         btnPembeli.setText("Pembeli");
+        btnPembeli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPembeliActionPerformed(evt);
+            }
+        });
 
         btnAngsur.setBackground(new java.awt.Color(51, 51, 255));
         btnAngsur.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         btnAngsur.setForeground(new java.awt.Color(255, 255, 255));
         btnAngsur.setText("Angsur");
+        btnAngsur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAngsurActionPerformed(evt);
+            }
+        });
 
         btnMotor.setBackground(new java.awt.Color(51, 51, 255));
         btnMotor.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         btnMotor.setForeground(new java.awt.Color(255, 255, 255));
         btnMotor.setText("Motor");
+        btnMotor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMotorActionPerformed(evt);
+            }
+        });
 
         btnKredit.setBackground(new java.awt.Color(51, 51, 255));
         btnKredit.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         btnKredit.setForeground(new java.awt.Color(255, 255, 255));
         btnKredit.setText("Kredit");
+        btnKredit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKreditActionPerformed(evt);
+            }
+        });
 
         btnReport.setBackground(new java.awt.Color(51, 51, 255));
         btnReport.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         btnReport.setForeground(new java.awt.Color(255, 255, 255));
         btnReport.setText("Report");
+        btnReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportActionPerformed(evt);
+            }
+        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kreditmotor/image/sales (2).png"))); // NOI18N
 
@@ -237,8 +294,43 @@ public class FormMenu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        new FormLogin().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnSalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalesActionPerformed
+        new FormSales().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnSalesActionPerformed
+
+    private void btnKreditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKreditActionPerformed
+        new FormKredit().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnKreditActionPerformed
+
+    private void btnPembeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPembeliActionPerformed
+        new FormPembeli().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnPembeliActionPerformed
+
+    private void btnAngsurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAngsurActionPerformed
+        new FormAngsur().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnAngsurActionPerformed
+
+    private void btnMotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotorActionPerformed
+        new FormMotor().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnMotorActionPerformed
+
+    private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
+        new FormReport().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnReportActionPerformed
+
     public static void main(String args[]) {
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -246,13 +338,7 @@ public class FormMenu extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FormMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
