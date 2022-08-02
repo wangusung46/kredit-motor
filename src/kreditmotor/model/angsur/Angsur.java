@@ -1,13 +1,13 @@
 package kreditmotor.model.angsur;
 
-import java.sql.Date;
+import java.util.Date;
+
 
 public class Angsur {
     
     private Long id;
     private Long idKredit;
     private Date tanggal;
-    private Long idSales;
 
     public Long getId() {
         return id;
@@ -33,17 +33,9 @@ public class Angsur {
         this.tanggal = tanggal;
     }
 
-    public Long getIdSales() {
-        return idSales;
-    }
-
-    public void setIdSales(Long idSales) {
-        this.idSales = idSales;
-    }
-
     @Override
     public String toString() {
-        return "Angsur{" + "id=" + id + ", idKredit=" + idKredit + ", tanggal=" + tanggal + ", idSales=" + idSales + '}';
+        return "Angsur{" + "id=" + id + ", idKredit=" + idKredit + ", tanggal=" + tanggal + '}';
     }
     
 }

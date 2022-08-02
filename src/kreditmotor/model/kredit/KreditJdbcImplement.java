@@ -1,6 +1,5 @@
 package kreditmotor.model.kredit;
 
-import koneksi.Conn;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,15 +7,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import koneksi.Conn;
 import org.apache.log4j.Logger;
 
 public class KreditJdbcImplement implements KreditJdbc {
-
+    
+    private static final Logger logger = Logger.getLogger(KreditJdbcImplement.class);
     private final Connection connection;
     private ResultSet resultSet;
     private PreparedStatement preparedStatement;
     private String sql;
-    private static final Logger logger = Logger.getLogger(KreditJdbcImplement.class);
 
     public KreditJdbcImplement() {
         connection = Conn.getConnection();
@@ -37,6 +37,7 @@ public class KreditJdbcImplement implements KreditJdbc {
                 kredit.setIdBarang(resultSet.getLong("id_barang"));
                 kredit.setTanggalKredit(resultSet.getDate("tanggal_kredit"));
                 kredit.setIdSales(resultSet.getLong("id_sales"));                           
+                kredit.setJumlahBulan(resultSet.getLong("jumlah_bulan"));                           
                 response.add(kredit);
             }
             resultSet.close();
@@ -55,7 +56,7 @@ public class KreditJdbcImplement implements KreditJdbc {
         logger.debug(request.toString());
         Kredit response = new Kredit();
         try {
-            sql = "select * from kredit where id = ?;";
+            sql = "select a.*, ROUND((b.harga_jual / a.jumlah_bulan), 0) tenor from kredit a left join motor b on b.id = a.id_barang where a.id = ?;";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, request);
             logger.debug(preparedStatement.toString());
@@ -65,7 +66,9 @@ public class KreditJdbcImplement implements KreditJdbc {
                 response.setIdPembeli(resultSet.getLong("id_pembeli"));
                 response.setIdBarang(resultSet.getLong("id_barang"));
                 response.setTanggalKredit(resultSet.getDate("tanggal_kredit"));
-                response.setIdSales(resultSet.getLong("id_sales"));                
+                response.setIdSales(resultSet.getLong("id_sales"));        
+                response.setJumlahBulan(resultSet.getLong("jumlah_bulan"));            
+                response.setTenor(resultSet.getLong("tenor"));            
             }
             logger.debug(response.toString());
         } catch (SQLException e) {
@@ -79,12 +82,13 @@ public class KreditJdbcImplement implements KreditJdbc {
     public void insert(Kredit request) {
         logger.debug(request.toString());
         try {
-            sql = "INSERT INTO kredit (id_pembeli, id_barang, tanggal_kredit, id_sales) VALUES(?, ?, ?, ?);";
+            sql = "INSERT INTO kredit (id_pembeli, id_barang, tanggal_kredit, id_sales, jumlah_bulan) VALUES(?, ?, ?, ?, ?);";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, request.getIdPembeli());
             preparedStatement.setLong(2, request.getIdBarang());
-            preparedStatement.setDate(3, request.getTanggalKredit());
+            preparedStatement.setDate(3, new java.sql.Date(request.getTanggalKredit().getTime()));
             preparedStatement.setLong(4, request.getIdSales());                  
+            preparedStatement.setLong(5, request.getJumlahBulan());                  
             logger.debug(preparedStatement.toString());
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -97,13 +101,14 @@ public class KreditJdbcImplement implements KreditJdbc {
     public void update(Kredit request) {
         logger.debug(request.toString());
         try {
-            sql = "UPDATE kredit SET id_pembeli=?, id_barang, tanggal_kredit=?, id_sales=? WHERE id=?;";
+            sql = "UPDATE kredit SET id_pembeli=?, id_barang=?, tanggal_kredit=?, id_sales=?, jumlah_bulan=? WHERE id=?;";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, request.getIdPembeli());
             preparedStatement.setLong(2, request.getIdBarang());
-            preparedStatement.setDate(3, request.getTanggalKredit());
-            preparedStatement.setLong(4, request.getIdSales());            
-            preparedStatement.setLong(5, request.getId());
+            preparedStatement.setDate(3, new java.sql.Date(request.getTanggalKredit().getTime()));
+            preparedStatement.setLong(4, request.getIdSales());   
+            preparedStatement.setLong(5, request.getJumlahBulan());       
+            preparedStatement.setLong(6, request.getId());
             logger.debug(preparedStatement.toString());
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -127,5 +132,5 @@ public class KreditJdbcImplement implements KreditJdbc {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-   
+    
 }

@@ -1,6 +1,7 @@
 package kreditmotor.model.kredit;
 
-import java.sql.Date;
+import java.util.Date;
+
 
 public class Kredit {
     
@@ -9,6 +10,8 @@ public class Kredit {
     private Long idBarang;
     private Date tanggalKredit;
     private Long idSales;
+    private Long jumlahBulan;
+    private Long tenor;
 
     public Long getId() {
         return id;
@@ -52,7 +55,23 @@ public class Kredit {
 
     @Override
     public String toString() {
-        return "Kredit{" + "id=" + id + ", idPembeli=" + idPembeli + ", idBarang=" + idBarang + ", tanggalKredit=" + tanggalKredit + ", idSales=" + idSales + '}';
+        return "Kredit{" + "id=" + id + ", idPembeli=" + idPembeli + ", idBarang=" + idBarang + ", tanggalKredit=" + tanggalKredit + ", idSales=" + idSales + ", jumlahBulan=" + jumlahBulan + ", tenor=" + tenor + '}';
+    }
+
+    public Long getJumlahBulan() {
+        return jumlahBulan;
+    }
+
+    public void setJumlahBulan(Long jumlahBulan) {
+        this.jumlahBulan = jumlahBulan;
+    }
+
+    public Long getTenor() {
+        return tenor;
+    }
+
+    public void setTenor(Long tenor) {
+        this.tenor = tenor;
     }
     
 }

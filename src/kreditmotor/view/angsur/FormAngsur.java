@@ -1,6 +1,5 @@
 package kreditmotor.view.angsur;
 
-import java.sql.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -10,16 +9,12 @@ import kreditmotor.model.angsur.AngsurJdbcImplement;
 import kreditmotor.model.kredit.Kredit;
 import kreditmotor.model.kredit.KreditJdbc;
 import kreditmotor.model.kredit.KreditJdbcImplement;
-import kreditmotor.model.sales.Sales;
-import kreditmotor.model.sales.SalesJdbc;
-import kreditmotor.model.sales.SalesJdbcImplement;
 import kreditmotor.view.menu.FormMenu;
 
 public class FormAngsur extends javax.swing.JFrame {
     
     private final AngsurJdbc angsurJdbc;
     private final KreditJdbc kreditJdbc;
-    private final SalesJdbc salesJdbc;
     private Boolean clickTable;
     private DefaultTableModel defaultTableModel;
 
@@ -27,19 +22,16 @@ public class FormAngsur extends javax.swing.JFrame {
         initComponents();
         angsurJdbc = new AngsurJdbcImplement();
         kreditJdbc = new KreditJdbcImplement();
-        salesJdbc = new SalesJdbcImplement();
         initTable();
         loadTable();
         loadComboBoxKredit();
-        loadComboBoxSales();
     }
     
     private void initTable() {
         defaultTableModel = new DefaultTableModel();
         defaultTableModel.addColumn("No");
         defaultTableModel.addColumn("Id Kredit");
-        defaultTableModel.addColumn("Tanggal");        
-        defaultTableModel.addColumn("Id Sales");
+        defaultTableModel.addColumn("Tanggal");
         tableAngsuran.setModel(defaultTableModel);
     }
     
@@ -48,12 +40,11 @@ public class FormAngsur extends javax.swing.JFrame {
         defaultTableModel.fireTableDataChanged();
         List<Angsur> responses = angsurJdbc.selectAll();
         if (responses != null) {
-            Object[] objects = new Object[10];
+            Object[] objects = new Object[4];
             for (Angsur response : responses) {
                 objects[0] = response.getId();
                 objects[1] = response.getIdKredit();                
-                objects[3] = response.getTanggal();
-                objects[4] = response.getIdSales();                
+                objects[2] = response.getTanggal();              
                 defaultTableModel.addRow(objects);
             }
             clickTable = false;
@@ -66,23 +57,19 @@ public class FormAngsur extends javax.swing.JFrame {
             cbxIdKredit.addItem(String.valueOf(response.getId()));
         }
     }
-
-    private void loadComboBoxSales() {
-        List<Sales> responses = salesJdbc.selectAll();
-        for (Sales response : responses) {
-            cbxIdSales.addItem(String.valueOf(response.getId()));
-        }
+    
+    private void loadTextKredit() {
+        Kredit response = kreditJdbc.select(Long.parseLong(cbxIdKredit.getSelectedItem().toString()));
+        txtNama.setText(response.getTenor().toString());
     }
     
     private void clickTable() {
-        cbxIdKredit.setSelectedItem(defaultTableModel.getValueAt(tableAngsuran.getSelectedRow(), 1).toString());       
-        cbxIdSales.setSelectedItem(defaultTableModel.getValueAt(tableAngsuran.getSelectedRow(), 2).toString());        
+        cbxIdKredit.setSelectedItem(defaultTableModel.getValueAt(tableAngsuran.getSelectedRow(), 1).toString()); 
         clickTable = true;
     }
     
     private void empty() {
-        cbxIdKredit.setSelectedIndex(0);       
-        cbxIdSales.setSelectedIndex(0);        
+        cbxIdKredit.setSelectedIndex(0);  
     }
     
     private void performSave() {
@@ -90,9 +77,8 @@ public class FormAngsur extends javax.swing.JFrame {
             if (JOptionPane.showConfirmDialog(null, "Do you want to save new data ?", "Info", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
                 Angsur request = new Angsur();
                 request.setId(0L);
-                request.setIdKredit(Long.parseLong(cbxIdKredit.getSelectedItem().toString()));                                                          
-                request.setIdSales(Long.parseLong(cbxIdSales.getSelectedItem().toString()));                               
-                request.setTanggal((Date) dateAngsuran.getDate());               
+                request.setIdKredit(Long.parseLong(cbxIdKredit.getSelectedItem().toString()));                             
+                request.setTanggal(dateAngsuran.getDate());               
                 angsurJdbc.insert(request);
                 loadTable();
                 empty();
@@ -109,9 +95,8 @@ public class FormAngsur extends javax.swing.JFrame {
                 if (JOptionPane.showConfirmDialog(null, "Do you want to update data by id " + defaultTableModel.getValueAt(tableAngsuran.getSelectedRow(), 0).toString() + " ?", "Warning", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
                     Angsur request = new Angsur();
                     request.setId(Long.parseLong(defaultTableModel.getValueAt(tableAngsuran.getSelectedRow(), 0).toString()));
-                    request.setIdKredit(Long.parseLong(cbxIdKredit.getSelectedItem().toString()));                                  
-                    request.setIdSales(Long.parseLong(cbxIdSales.getSelectedItem().toString()));                   
-                    request.setTanggal((Date) dateAngsuran.getDate());
+                    request.setIdKredit(Long.parseLong(cbxIdKredit.getSelectedItem().toString()));                   
+                    request.setTanggal(dateAngsuran.getDate());
                     angsurJdbc.update(request);
                     loadTable();
                     empty();
@@ -151,10 +136,8 @@ public class FormAngsur extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         cbxIdKredit = new javax.swing.JComboBox<>();
         dateAngsuran = new com.toedter.calendar.JDateChooser();
-        cbxIdSales = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableAngsuran = new javax.swing.JTable();
         btnInsert = new javax.swing.JButton();
@@ -165,6 +148,8 @@ public class FormAngsur extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtNama = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -223,22 +208,17 @@ public class FormAngsur extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Tanggal      :");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Id Sales      :");
-
         cbxIdKredit.setBackground(new java.awt.Color(204, 204, 204));
         cbxIdKredit.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         cbxIdKredit.setForeground(new java.awt.Color(255, 255, 255));
-        cbxIdKredit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kredit 1", "Kredit 2" }));
+        cbxIdKredit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxIdKreditActionPerformed(evt);
+            }
+        });
 
         dateAngsuran.setBackground(new java.awt.Color(204, 204, 204));
         dateAngsuran.setForeground(new java.awt.Color(255, 255, 255));
-
-        cbxIdSales.setBackground(new java.awt.Color(204, 204, 204));
-        cbxIdSales.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        cbxIdSales.setForeground(new java.awt.Color(255, 255, 255));
-        cbxIdSales.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sales 1", "Sales 2" }));
 
         tableAngsuran.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -303,20 +283,29 @@ public class FormAngsur extends javax.swing.JFrame {
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kreditmotor/image/insert (1).png"))); // NOI18N
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Jumlah Bayar               :");
+
+        txtNama.setEditable(false);
+        txtNama.setBackground(new java.awt.Color(153, 153, 153));
+        txtNama.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtNama.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbxIdKredit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(dateAngsuran, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbxIdSales, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                    .addComponent(dateAngsuran, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                    .addComponent(txtNama, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel11)
@@ -340,22 +329,22 @@ public class FormAngsur extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbxIdKredit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dateAngsuran, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxIdSales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28)
+                        .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dateAngsuran, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
@@ -390,7 +379,7 @@ public class FormAngsur extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -417,7 +406,7 @@ public class FormAngsur extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 165, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -453,6 +442,10 @@ public class FormAngsur extends javax.swing.JFrame {
         clickTable();
     }//GEN-LAST:event_tableAngsuranMouseClicked
 
+    private void cbxIdKreditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxIdKreditActionPerformed
+        loadTextKredit();
+    }//GEN-LAST:event_cbxIdKreditActionPerformed
+
     public static void main(String args[]) {
         
         try {
@@ -462,13 +455,7 @@ public class FormAngsur extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormAngsur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormAngsur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormAngsur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FormAngsur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
@@ -487,7 +474,6 @@ public class FormAngsur extends javax.swing.JFrame {
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cbxIdKredit;
-    private javax.swing.JComboBox<String> cbxIdSales;
     private com.toedter.calendar.JDateChooser dateAngsuran;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -504,5 +490,6 @@ public class FormAngsur extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableAngsuran;
+    private javax.swing.JTextField txtNama;
     // End of variables declaration//GEN-END:variables
 }

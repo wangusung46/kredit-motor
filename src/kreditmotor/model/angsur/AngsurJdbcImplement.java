@@ -34,8 +34,7 @@ public class AngsurJdbcImplement implements AngsurJdbc {
                 Angsur angsur = new Angsur();
                 angsur.setId(resultSet.getLong("id"));                
                 angsur.setIdKredit(resultSet.getLong("id_kredit"));
-                angsur.setTanggal(resultSet.getDate("tanggal"));
-                angsur.setIdSales(resultSet.getLong("id_sales"));                           
+                angsur.setTanggal(resultSet.getDate("tanggal"));                         
                 response.add(angsur);
             }
             resultSet.close();
@@ -62,8 +61,7 @@ public class AngsurJdbcImplement implements AngsurJdbc {
             if (resultSet.next()) {
                 response.setId(resultSet.getLong("id"));
                 response.setIdKredit(resultSet.getLong("id_kredit"));
-                response.setTanggal(resultSet.getDate("tanggal"));
-                response.setIdSales(resultSet.getLong("id_sales"));                
+                response.setTanggal(resultSet.getDate("tanggal"));              
             }
             logger.debug(response.toString());
         } catch (SQLException e) {
@@ -77,11 +75,10 @@ public class AngsurJdbcImplement implements AngsurJdbc {
     public void insert(Angsur request) {
         logger.debug(request.toString());
         try {
-            sql = "INSERT INTO angsur (id_kredit, tanggal, id_sales) VALUES(?, ?, ?);";
+            sql = "INSERT INTO angsur (id_kredit, tanggal) VALUES(?, ?);";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, request.getIdKredit());
-            preparedStatement.setDate(2, request.getTanggal());
-            preparedStatement.setLong(3, request.getIdSales());                  
+            preparedStatement.setDate(2, new java.sql.Date(request.getTanggal().getTime()));    
             logger.debug(preparedStatement.toString());
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -94,11 +91,10 @@ public class AngsurJdbcImplement implements AngsurJdbc {
     public void update(Angsur request) {
         logger.debug(request.toString());
         try {
-            sql = "UPDATE angsur SET id_kredit=?, tanggal=?, id_sales=? WHERE id=?;";
+            sql = "UPDATE angsur SET id_kredit=?, tanggal=? WHERE id=?;";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, request.getIdKredit());
-            preparedStatement.setDate(2, request.getTanggal());
-            preparedStatement.setLong(3, request.getIdSales());            
+            preparedStatement.setDate(2, new java.sql.Date(request.getTanggal().getTime()));       
             preparedStatement.setLong(4, request.getId());
             logger.debug(preparedStatement.toString());
             preparedStatement.executeUpdate();
