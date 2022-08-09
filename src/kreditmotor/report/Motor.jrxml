@@ -57,14 +57,14 @@
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Laporan Data Klien]]></text>
+				<text><![CDATA[Motor]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="200" height="20" uuid="d7004802-0708-4630-bd95-643d64dbb75b">
+				<reportElement x="0" y="0" width="268" height="20" uuid="d7004802-0708-4630-bd95-643d64dbb75b">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box>
@@ -80,7 +80,7 @@
 				<text><![CDATA[ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="200" y="0" width="200" height="20" uuid="2bd9542a-20bf-490b-9779-e9a53b13ee28">
+				<reportElement x="268" y="0" width="267" height="20" uuid="2bd9542a-20bf-490b-9779-e9a53b13ee28">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box>
@@ -93,10 +93,10 @@
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Nama]]></text>
+				<text><![CDATA[Motor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="400" y="0" width="201" height="20" uuid="63af8054-1b28-42a8-8ad9-c38153a4681d">
+				<reportElement x="535" y="0" width="266" height="20" uuid="63af8054-1b28-42a8-8ad9-c38153a4681d">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box>
@@ -109,28 +109,43 @@
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Alamat]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="601" y="0" width="200" height="20" uuid="4fec4679-c404-4a09-93d7-6e6194e5c969">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Nomor Telepon]]></text>
+				<text><![CDATA[Harga]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="20" splitType="Stretch"/>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="268" height="30" uuid="b4d0cdcb-ef6a-47ac-a5f8-62089ad1fd42">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f19ad144-87a3-4ec5-ac00-2fba6ea14f77"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="268" y="0" width="267" height="30" uuid="f2ca412b-faff-4cce-bcbd-c1570472d8d7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eb5cfcab-a201-43e4-a7cb-4a5fa41d36e4"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{merek}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="535" y="0" width="267" height="30" uuid="9b5fc76d-b454-45a0-bb11-73cc6f5f68a5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="929457c1-5fed-41f5-ab8d-6b3dde376d15"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{harga_jual}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<pageFooter>
 		<band height="54" splitType="Stretch">
