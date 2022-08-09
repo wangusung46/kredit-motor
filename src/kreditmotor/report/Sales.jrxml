@@ -52,14 +52,14 @@
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Laporan Data Klien]]></text>
+				<text><![CDATA[Sales]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="200" height="20" uuid="d7004802-0708-4630-bd95-643d64dbb75b">
+				<reportElement x="0" y="0" width="401" height="20" uuid="d7004802-0708-4630-bd95-643d64dbb75b">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box>
@@ -75,7 +75,7 @@
 				<text><![CDATA[ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="200" y="0" width="200" height="20" uuid="2bd9542a-20bf-490b-9779-e9a53b13ee28">
+				<reportElement x="401" y="0" width="398" height="20" uuid="2bd9542a-20bf-490b-9779-e9a53b13ee28">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box>
@@ -90,42 +90,31 @@
 				</textElement>
 				<text><![CDATA[Nama]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="400" y="0" width="201" height="20" uuid="63af8054-1b28-42a8-8ad9-c38153a4681d">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Alamat]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="601" y="0" width="200" height="20" uuid="4fec4679-c404-4a09-93d7-6e6194e5c969">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Nomor Telepon]]></text>
-			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="20" splitType="Stretch"/>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="401" height="30" uuid="e683f29e-8afb-42af-82fd-73a009d265ab">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d87c3cb9-8bfb-4c7a-85bc-c10e1f63a5b4"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="401" y="0" width="401" height="30" uuid="9c4b9db5-6d74-4981-b987-fadde25a828d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eca341c0-8779-4479-b571-917bf697f590"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<pageFooter>
 		<band height="54" splitType="Stretch">
