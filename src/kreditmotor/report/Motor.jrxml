@@ -48,6 +48,10 @@
 				</textElement>
 				<text><![CDATA[Jl. Masjid Hudal Islam No 58 RT01/07 Kecamatan Pondok Gede Kelurahan Jatimakmur Kota Bekasi]]></text>
 			</staticText>
+			<image>
+				<reportElement x="1" y="2" width="160" height="76" uuid="06abf14d-a285-4795-8d0c-874aaf289fe2"/>
+				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -148,14 +152,21 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="54" splitType="Stretch">
+		<band height="120" splitType="Stretch">
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="699" y="34" width="100" height="20" uuid="b7fe39f4-bc0c-40b6-8fb8-203a427bc17a"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				<reportElement x="602" y="39" width="200" height="20" uuid="69a825fa-016f-43d5-8bb1-88dbbb7ff6ea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Jakarta, " + new SimpleDateFormat("dd MMMM yyyy", new java.util.Locale("id")).format(new Date())]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="599" y="34" width="100" height="20" uuid="2cf87ead-1c8b-43ce-bdaa-b7cff8f7ab10"/>
-				<text><![CDATA[Jakarta,]]></text>
+				<reportElement x="602" y="59" width="198" height="20" uuid="9ddce5e7-c83b-4a2a-b789-2af3ff44b844"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Manager]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="602" y="100" width="198" height="20" uuid="58774717-498d-4c1b-9347-36b47f8ff426"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Dimas Wahyu Prabowo]]></text>
 			</staticText>
 		</band>
 	</pageFooter>

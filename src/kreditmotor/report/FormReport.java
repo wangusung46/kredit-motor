@@ -26,6 +26,7 @@ public class FormReport extends javax.swing.JFrame {
     private void printSales() {
         try {
             HashMap parameter = new HashMap();
+            parameter.put("Logo", "src\\kreditmotor\\report\\logo.jpeg");
             InputStream file = getClass().getResourceAsStream("/kreditmotor/report/Sales.jrxml");
             JasperDesign JasperDesign = JRXmlLoader.load(file);
             JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
@@ -39,6 +40,7 @@ public class FormReport extends javax.swing.JFrame {
     private void printMotor() {
         try {
             HashMap parameter = new HashMap();
+            parameter.put("Logo", "src\\kreditmotor\\report\\logo.jpeg");
             InputStream file = getClass().getResourceAsStream("/kreditmotor/report/Motor.jrxml");
             JasperDesign JasperDesign = JRXmlLoader.load(file);
             JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
@@ -52,6 +54,7 @@ public class FormReport extends javax.swing.JFrame {
     private void printKredit() {
         try {
             HashMap parameter = new HashMap();
+            parameter.put("Logo", "src\\kreditmotor\\report\\logo.jpeg");
             InputStream file = getClass().getResourceAsStream("/kreditmotor/report/Kredit.jrxml");
             JasperDesign JasperDesign = JRXmlLoader.load(file);
             JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
@@ -65,6 +68,7 @@ public class FormReport extends javax.swing.JFrame {
     private void printAngsur() {
         try {
             HashMap parameter = new HashMap();
+            parameter.put("Logo", "src\\kreditmotor\\report\\logo.jpeg");
             InputStream file = getClass().getResourceAsStream("/kreditmotor/report/Angsur.jrxml");
             JasperDesign JasperDesign = JRXmlLoader.load(file);
             JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
@@ -78,6 +82,7 @@ public class FormReport extends javax.swing.JFrame {
     private void printPembeli() {
         try {
             HashMap parameter = new HashMap();
+            parameter.put("Logo", "src\\kreditmotor\\report\\logo.jpeg");
             InputStream file = getClass().getResourceAsStream("/kreditmotor/report/Pembeli.jrxml");
             JasperDesign JasperDesign = JRXmlLoader.load(file);
             JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
