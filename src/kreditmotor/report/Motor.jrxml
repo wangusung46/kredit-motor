@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Motor" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="50328c8e-3630-42bd-ab70-bbadfdffa14e">
 	<property name="ireport.zoom" value="1.4641000000000006"/>
 	<property name="ireport.x" value="31"/>
@@ -36,7 +35,7 @@
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[CV ADHI RAHAYU]]></text>
+				<text><![CDATA[FIF GROUP]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1" y="78" width="800" height="3" uuid="cfb90550-c6e9-491b-835b-04af2eb6b7a1"/>
@@ -46,8 +45,12 @@
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Jl. Masjid Hudal Islam No 58 RT01/07 Kecamatan Pondok Gede Kelurahan Jatimakmur Kota Bekasi]]></text>
+				<text><![CDATA[Jl Pramuka Raya No. 15 RT 006 RW 05 Kel. Rawasari Kec. Cempaka Putih, Jakarta Timur, DKI Jakarta 10570]]></text>
 			</staticText>
+			<image>
+				<reportElement x="1" y="2" width="160" height="76" uuid="06abf14d-a285-4795-8d0c-874aaf289fe2"/>
+				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -57,7 +60,7 @@
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Motor]]></text>
+				<text><![CDATA[Laporan Data Motor]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -148,14 +151,21 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="54" splitType="Stretch">
+		<band height="120" splitType="Stretch">
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="699" y="34" width="100" height="20" uuid="b7fe39f4-bc0c-40b6-8fb8-203a427bc17a"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				<reportElement x="602" y="39" width="200" height="20" uuid="69a825fa-016f-43d5-8bb1-88dbbb7ff6ea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Jakarta, " + new SimpleDateFormat("EEEE dd MMMM yyyy", new java.util.Locale("id")).format(new Date())]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="599" y="34" width="100" height="20" uuid="2cf87ead-1c8b-43ce-bdaa-b7cff8f7ab10"/>
-				<text><![CDATA[Jakarta,]]></text>
+				<reportElement x="602" y="59" width="198" height="20" uuid="9ddce5e7-c83b-4a2a-b789-2af3ff44b844"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Manager]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="602" y="100" width="198" height="20" uuid="58774717-498d-4c1b-9347-36b47f8ff426"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Dimas Wahyu Prabowo]]></text>
 			</staticText>
 		</band>
 	</pageFooter>

@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Sales" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="50328c8e-3630-42bd-ab70-bbadfdffa14e">
-	<property name="ireport.zoom" value="1.4641000000000006"/>
-	<property name="ireport.x" value="31"/>
-	<property name="ireport.y" value="13"/>
+	<property name="ireport.zoom" value="1.0000000000000004"/>
+	<property name="ireport.x" value="149"/>
+	<property name="ireport.y" value="0"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="KreditMotor"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.report.description" value=""/>
 	<parameter name="Logo" class="java.lang.String"/>
-	<queryString language="SQL">
-		<![CDATA[select * from sales]]>
+	<queryString>
+		<![CDATA[select * from motor]]>
 	</queryString>
 	<field name="id" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.name" value="id"/>
 		<property name="com.jaspersoft.studio.field.label" value="id"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="sales"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="nama" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="nama"/>
-		<property name="com.jaspersoft.studio.field.label" value="nama"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="sales"/>
+	<field name="merek" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="harga_jual" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -31,7 +32,7 @@
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[CV ADHI RAHAYU]]></text>
+				<text><![CDATA[FIF GROUP]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1" y="78" width="800" height="3" uuid="cfb90550-c6e9-491b-835b-04af2eb6b7a1"/>
@@ -41,8 +42,12 @@
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Jl. Masjid Hudal Islam No 58 RT01/07 Kecamatan Pondok Gede Kelurahan Jatimakmur Kota Bekasi]]></text>
+				<text><![CDATA[Jl Pramuka Raya No. 15 RT 006 RW 05 Kel. Rawasari Kec. Cempaka Putih, Jakarta Timur, DKI Jakarta 10570]]></text>
 			</staticText>
+			<image>
+				<reportElement x="1" y="2" width="160" height="76" uuid="b07ceda0-0e76-4848-bb02-639313ebd9ee"/>
+				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -52,7 +57,7 @@
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Sales]]></text>
+				<text><![CDATA[Laporan Data List Harga]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -72,7 +77,7 @@
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[ID]]></text>
+				<text><![CDATA[MEREK]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="401" y="0" width="398" height="20" uuid="2bd9542a-20bf-490b-9779-e9a53b13ee28">
@@ -88,7 +93,7 @@
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Nama]]></text>
+				<text><![CDATA[Harga]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -102,29 +107,36 @@
 					<pen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{merek}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="401" y="0" width="401" height="30" uuid="9c4b9db5-6d74-4981-b987-fadde25a828d">
+				<reportElement x="401" y="0" width="398" height="30" uuid="9c4b9db5-6d74-4981-b987-fadde25a828d">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eca341c0-8779-4479-b571-917bf697f590"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{harga_jual}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="54" splitType="Stretch">
+		<band height="120" splitType="Stretch">
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="699" y="34" width="100" height="20" uuid="b7fe39f4-bc0c-40b6-8fb8-203a427bc17a"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				<reportElement x="602" y="39" width="200" height="20" uuid="4bdc687e-c0aa-4c24-8cc5-5695c965be4c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Jakarta, " + new SimpleDateFormat("EEEE dd MMMM yyyy", new java.util.Locale("id")).format(new Date())]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="599" y="34" width="100" height="20" uuid="2cf87ead-1c8b-43ce-bdaa-b7cff8f7ab10"/>
-				<text><![CDATA[Jakarta,]]></text>
+				<reportElement x="602" y="59" width="198" height="20" uuid="35576a9d-9141-46db-a060-e7783a4ae45f"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Manager]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="602" y="100" width="198" height="20" uuid="992343fd-aa10-444b-a695-f6f56e6b8cb0"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Dimas Wahyu Prabowo]]></text>
 			</staticText>
 		</band>
 	</pageFooter>
