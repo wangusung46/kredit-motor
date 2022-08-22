@@ -86,7 +86,7 @@ left join pembeli d on
 				<text><![CDATA[Jl Pramuka Raya No. 15 RT 006 RW 05 Kel. Rawasari Kec. Cempaka Putih, Jakarta Timur, DKI Jakarta 10570]]></text>
 			</staticText>
 			<image>
-				<reportElement x="1" y="2" width="160" height="76" uuid="860271e6-9596-4569-8cb4-95055e1637af"/>
+				<reportElement x="1" y="2" width="200" height="80" uuid="860271e6-9596-4569-8cb4-95055e1637af"/>
 				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
 			</image>
 		</band>
@@ -323,7 +323,7 @@ left join pembeli d on
 			<textField pattern="EEEEE dd MMMMM yyyy">
 				<reportElement x="602" y="39" width="200" height="20" uuid="78b3f1a4-bd30-4fcd-9ab9-adf80fb7dc0c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA["Jakarta, " + new SimpleDateFormat("dd MMMM yyyy", new java.util.Locale("id")).format(new Date())]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Jakarta, " + new SimpleDateFormat("EEEE dd MMMM yyyy", new java.util.Locale("id")).format(new Date())]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="602" y="59" width="198" height="20" uuid="f9873566-0d65-46bf-b9a1-1d716eccde06"/>

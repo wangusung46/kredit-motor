@@ -65,7 +65,7 @@ left join sales d on
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[CV ADHI RAHAYU]]></text>
+				<text><![CDATA[FIF GROUP]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1" y="78" width="800" height="3" uuid="cfb90550-c6e9-491b-835b-04af2eb6b7a1"/>
@@ -75,7 +75,7 @@ left join sales d on
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Jl. Masjid Hudal Islam No 58 RT01/07 Kecamatan Pondok Gede Kelurahan Jatimakmur Kota Bekasi]]></text>
+				<text><![CDATA[Jl Pramuka Raya No. 15 RT 006 RW 05 Kel. Rawasari Kec. Cempaka Putih, Jakarta Timur, DKI Jakarta 10570]]></text>
 			</staticText>
 			<image>
 				<reportElement x="1" y="2" width="160" height="76" uuid="96584b4b-d55f-4307-9c29-893d20c5516d"/>
@@ -263,7 +263,7 @@ left join sales d on
 			<textField pattern="EEEEE dd MMMMM yyyy">
 				<reportElement x="602" y="39" width="200" height="20" uuid="a4f22437-c67c-4a86-b708-6421161aeabf"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA["Jakarta, " + new SimpleDateFormat("dd MMMM yyyy", new java.util.Locale("id")).format(new Date())]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Jakarta, " + new SimpleDateFormat(" EEEE dd MMMM yyyy", new java.util.Locale("id")).format(new Date())]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="602" y="59" width="198" height="20" uuid="b0315cb2-ac81-45f6-8dfb-8531e7d65cda"/>

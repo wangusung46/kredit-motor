@@ -26,7 +26,7 @@ public class FormReport extends javax.swing.JFrame {
     private void printSales() {
         try {
             HashMap parameter = new HashMap();
-            parameter.put("Logo", "src\\kreditmotor\\report\\logo.jpeg");
+            parameter.put("Logo", "src\\kreditmotor\\report\\logo.PNG");
             InputStream file = getClass().getResourceAsStream("/kreditmotor/report/Sales.jrxml");
             JasperDesign JasperDesign = JRXmlLoader.load(file);
             JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
@@ -40,7 +40,7 @@ public class FormReport extends javax.swing.JFrame {
     private void printMotor() {
         try {
             HashMap parameter = new HashMap();
-            parameter.put("Logo", "src\\kreditmotor\\report\\logo.jpeg");
+            parameter.put("Logo", "src\\kreditmotor\\report\\logo.PNG");
             InputStream file = getClass().getResourceAsStream("/kreditmotor/report/Motor.jrxml");
             JasperDesign JasperDesign = JRXmlLoader.load(file);
             JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
@@ -54,7 +54,7 @@ public class FormReport extends javax.swing.JFrame {
     private void printKredit() {
         try {
             HashMap parameter = new HashMap();
-            parameter.put("Logo", "src\\kreditmotor\\report\\logo.jpeg");
+            parameter.put("Logo", "src\\kreditmotor\\report\\logo.PNG");
             InputStream file = getClass().getResourceAsStream("/kreditmotor/report/Kredit.jrxml");
             JasperDesign JasperDesign = JRXmlLoader.load(file);
             JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
@@ -68,7 +68,7 @@ public class FormReport extends javax.swing.JFrame {
     private void printAngsur() {
         try {
             HashMap parameter = new HashMap();
-            parameter.put("Logo", "src\\kreditmotor\\report\\logo.jpeg");
+            parameter.put("Logo", "src\\kreditmotor\\report\\logo.PNG");
             InputStream file = getClass().getResourceAsStream("/kreditmotor/report/Angsur.jrxml");
             JasperDesign JasperDesign = JRXmlLoader.load(file);
             JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
@@ -82,7 +82,7 @@ public class FormReport extends javax.swing.JFrame {
     private void printPembeli() {
         try {
             HashMap parameter = new HashMap();
-            parameter.put("Logo", "src\\kreditmotor\\report\\logo.jpeg");
+            parameter.put("Logo", "src\\kreditmotor\\report\\logo.PNG");
             InputStream file = getClass().getResourceAsStream("/kreditmotor/report/Pembeli.jrxml");
             JasperDesign JasperDesign = JRXmlLoader.load(file);
             JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
@@ -126,7 +126,6 @@ public class FormReport extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Menu Report");
 
         btnLogout.setBackground(new java.awt.Color(0, 102, 255));
@@ -157,7 +156,7 @@ public class FormReport extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnLogout)
                     .addComponent(jLabel1))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(153, 255, 255));
@@ -176,7 +175,7 @@ public class FormReport extends javax.swing.JFrame {
         btnReportPembeli.setBackground(new java.awt.Color(51, 51, 255));
         btnReportPembeli.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         btnReportPembeli.setForeground(new java.awt.Color(255, 255, 255));
-        btnReportPembeli.setText("Pembeli");
+        btnReportPembeli.setText("Customer");
         btnReportPembeli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReportPembeliActionPerformed(evt);
@@ -237,18 +236,18 @@ public class FormReport extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnReportMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(155, 155, 155)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnReportPembeli, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnReportKredit, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(btnReportKredit, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(155, 155, 155)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnReportPembeli)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -256,8 +255,8 @@ public class FormReport extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnReportAngsur, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(48, 48, 48))
+                        .addComponent(btnReportAngsur, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(43, 43, 43))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8)
@@ -274,7 +273,7 @@ public class FormReport extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(btnReportAngsur, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel6))
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)

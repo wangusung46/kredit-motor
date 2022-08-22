@@ -63,7 +63,6 @@ public class FormMenu extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Menu Utama");
 
         btnLogout.setBackground(new java.awt.Color(0, 102, 255));
@@ -94,7 +93,7 @@ public class FormMenu extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnLogout)
                     .addComponent(jLabel1))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(153, 255, 255));
@@ -113,7 +112,7 @@ public class FormMenu extends javax.swing.JFrame {
         btnPembeli.setBackground(new java.awt.Color(51, 51, 255));
         btnPembeli.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         btnPembeli.setForeground(new java.awt.Color(255, 255, 255));
-        btnPembeli.setText("Pembeli");
+        btnPembeli.setText("Customer");
         btnPembeli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPembeliActionPerformed(evt);

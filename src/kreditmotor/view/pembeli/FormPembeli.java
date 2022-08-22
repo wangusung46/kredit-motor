@@ -218,8 +218,7 @@ public class FormPembeli extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Pembeli");
+        jLabel1.setText("CUSTOMER");
 
         btnLogout.setBackground(new java.awt.Color(0, 102, 255));
         btnLogout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -249,14 +248,13 @@ public class FormPembeli extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(btnLogout))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(153, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Nama               :");
 
         tablePembeli.setModel(new javax.swing.table.DefaultTableModel(
@@ -327,7 +325,6 @@ public class FormPembeli extends javax.swing.JFrame {
         txtNama.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Jenis Kelamin :");
 
         cbxJenisKelamin.setBackground(new java.awt.Color(153, 153, 153));
@@ -340,11 +337,9 @@ public class FormPembeli extends javax.swing.JFrame {
         txtHp.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Hp                    :");
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Alamat            :");
 
         txtAlamat.setBackground(new java.awt.Color(153, 153, 153));
@@ -352,7 +347,6 @@ public class FormPembeli extends javax.swing.JFrame {
         txtAlamat.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("RT                    :");
 
         txtRt.setBackground(new java.awt.Color(153, 153, 153));
@@ -360,7 +354,6 @@ public class FormPembeli extends javax.swing.JFrame {
         txtRt.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("RW                  :");
 
         txtRw.setBackground(new java.awt.Color(153, 153, 153));
@@ -368,7 +361,6 @@ public class FormPembeli extends javax.swing.JFrame {
         txtRw.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("Desa               :");
 
         txtDesa.setBackground(new java.awt.Color(153, 153, 153));
@@ -376,7 +368,6 @@ public class FormPembeli extends javax.swing.JFrame {
         txtDesa.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setText("Kecamatan   :");
 
         txtKecamatan.setBackground(new java.awt.Color(153, 153, 153));
@@ -384,7 +375,6 @@ public class FormPembeli extends javax.swing.JFrame {
         txtKecamatan.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
         jLabel17.setText("Kabupaten   :");
 
         txtKabupaten.setBackground(new java.awt.Color(153, 153, 153));
@@ -392,7 +382,6 @@ public class FormPembeli extends javax.swing.JFrame {
         txtKabupaten.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
         jLabel18.setText("Provinsi        :");
 
         txtProvinsi.setBackground(new java.awt.Color(153, 153, 153));
@@ -454,7 +443,7 @@ public class FormPembeli extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(7, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
